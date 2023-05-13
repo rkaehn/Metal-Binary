@@ -1,0 +1,38 @@
+# Source Files
+SRC_DIR = $(SRCROOT)/shaders
+MTLP_JSON_GEN_SOURCE = $(SRC_DIR)/mtlp-json.swift $(SRC_DIR)/PipelineStateRecipe.swift
+METAL_SOURCE = $(SRC_DIR)/main.metal
+
+# Build Files
+AIR_FILES = $(patsubst $(SRC_DIR)/%.metal, %.air, $(METAL_SOURCE))
+DEP_FILES = $(patsubst $(SRC_DIR)/%.metal, %.d, $(METAL_SOURCE))
+METAL_LIB = main.metallib
+METAL_BIN_LIB = mainbin.metallib
+MTLP_JSON_GEN = mtlp-json
+MTLP_JSON = main.mtlp-json
+
+# Compiler Flags
+METAL_TT_FLAGS = -verbose $(shell metal-config -native-arch-flags -gpu-family apple5)
+METAL_FLAGS = --verbose
+SWIFT_FLAGS =
+ifeq ($(CONFIGURATION), Debug)
+	METAL_FLAGS += -D"DEBUG=1"
+	SWIFT_FLAGS += -D"DEBUG"
+endif
+
+# Recipes
+all: $(METAL_BIN_LIB) $(METAL_LIB)
+
+$(METAL_BIN_LIB): $(MTLP_JSON) $(METAL_LIB)
+	metal-tt $(METAL_LIB) ${MTLP_JSON} -o $(METAL_BIN_LIB) $(METAL_TT_FLAGS)
+	
+$(MTLP_JSON): $(MTLP_JSON_GEN_SOURCE)
+	xcrun -sdk macosx swiftc $(SWIFT_FLAGS) -parse-as-library $(MTLP_JSON_GEN_SOURCE) -o $(MTLP_JSON_GEN) && ./$(MTLP_JSON_GEN)
+
+$(METAL_LIB): $(AIR_FILES)
+	metallib $^ -o $@
+
+%.air: $(SRC_DIR)/%.metal
+	metal -c $< -o $@ $(METAL_FLAGS) -MMD
+
+-include $(DEP_FILES)
