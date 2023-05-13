@@ -47,6 +47,8 @@ public final class PipelineStateCache {
         descriptor.binaryArchives = [binaryArchive]
         descriptor.vertexFunction = makeFunctionWithDescriptor(pipelineStateDescriptor.vertexFunction)
         descriptor.fragmentFunction = makeFunctionWithDescriptor(pipelineStateDescriptor.fragmentFunction)
-        return try! device.makeRenderPipelineState(descriptor: descriptor, options: .failOnBinaryArchiveMiss).0
+        return try! device.makeRenderPipelineState(descriptor: descriptor,
+                                                   options: .failOnBinaryArchiveMiss,
+                                                   reflection: nil)
     }
 }

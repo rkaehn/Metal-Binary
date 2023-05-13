@@ -19,12 +19,20 @@ ifeq ($(CONFIGURATION), Debug)
 	METAL_FLAGS += -D"DEBUG=1"
 	SWIFT_FLAGS += -D"DEBUG"
 endif
+ifeq ($(PLATFORM_NAME), iphoneos)
+    METAL_TT_FLAGS += -platform_version ios 16.0 16.0
+    METAL_FLAGS += -miphoneos-version-min=16.0
+endif
+ifeq ($(PLATFORM_NAME), macosx)
+    METAL_TT_FLAGS += -platform_version macos 13.0 13.0
+    METAL_FLAGS += -mmacosx-version-min=13.0
+endif
 
 # Recipes
 all: $(METAL_BIN_LIB) $(METAL_LIB)
 
 $(METAL_BIN_LIB): $(MTLP_JSON) $(METAL_LIB)
-	metal-tt $(METAL_LIB) ${MTLP_JSON} -o $(METAL_BIN_LIB) $(METAL_TT_FLAGS)
+	metal-tt $(METAL_LIB) $(MTLP_JSON) -o $(METAL_BIN_LIB) $(METAL_TT_FLAGS)
 	
 $(MTLP_JSON): $(MTLP_JSON_GEN_SOURCE)
 	xcrun -sdk macosx swiftc $(SWIFT_FLAGS) -parse-as-library $(MTLP_JSON_GEN_SOURCE) -o $(MTLP_JSON_GEN) && ./$(MTLP_JSON_GEN)
