@@ -5,11 +5,11 @@ public struct FunctionConstant {
         case uchar(UInt8)
     }
     let payload: Payload
-    let index: Int
+    let name: String
     
-    public init(payload: Payload, index: Int) {
+    public init(payload: Payload, name: String) {
         self.payload = payload
-        self.index = index
+        self.name = name
     }
 }
 
@@ -63,7 +63,7 @@ public enum PipelineStateRecipe: CaseIterable {
     }
     
     private static func mainReleaseExecute(_ handler: Handler) {
-        let constant = FunctionConstant(payload: .uchar(16), index: 0)
+        let constant = FunctionConstant(payload: .uchar(16), name: "testConstant")
         let descriptor = PipelineStateDescriptor(
             vertexFunction: FunctionDescriptor(
                 name: "main_vertex"),

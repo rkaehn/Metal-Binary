@@ -1,15 +1,17 @@
 # Source Files
 SRC_DIR = $(SRCROOT)/shaders
-MTLP_JSON_GEN_SOURCE = $(SRC_DIR)/mtlp-json.swift $(SRC_DIR)/PipelineStateRecipe.swift
-METAL_SOURCE = $(SRC_DIR)/main.metal
+MTLP_JSON_GEN_SOURCE = $(SRC_DIR)/mtlp-json-gen.swift $(SRC_DIR)/PipelineStateRecipe.swift
+AIR_GEN_SOURCE = $(SRC_DIR)/air-gen.swift
+METAL_SOURCE = $(wildcard $(SRC_DIR)/*.metal)
 
 # Build Files
-AIR_FILES = $(patsubst $(SRC_DIR)/%.metal, %.air, $(METAL_SOURCE))
-DEP_FILES = $(patsubst $(SRC_DIR)/%.metal, %.d, $(METAL_SOURCE))
-METAL_LIB = main.metallib
 METAL_BIN_LIB = mainbin.metallib
-MTLP_JSON_GEN = mtlp-json
+METAL_LIB = main.metallib
 MTLP_JSON = main.mtlp-json
+MTLP_JSON_GEN = mtlp-json-gen
+AIR_PLACEHOLDER = $(patsubst $(SRC_DIR)/%.metal, %.placeholder, $(METAL_SOURCE))
+AIR_GEN = air-gen
+DEP_FILES = $(patsubst $(SRC_DIR)/%.metal, %.d, $(METAL_SOURCE))
 
 # Compiler Flags
 METAL_TT_FLAGS = -verbose $(shell metal-config -native-arch-flags -gpu-family apple5)
@@ -20,12 +22,12 @@ ifeq ($(CONFIGURATION), Debug)
 	SWIFT_FLAGS += -D"DEBUG"
 endif
 ifeq ($(PLATFORM_NAME), iphoneos)
-    METAL_TT_FLAGS += -platform_version ios 16.0 16.0
-    METAL_FLAGS += -miphoneos-version-min=16.0
+	METAL_TT_FLAGS += -platform_version ios 16.0 16.0
+	METAL_FLAGS += -miphoneos-version-min=16.0
 endif
 ifeq ($(PLATFORM_NAME), macosx)
-    METAL_TT_FLAGS += -platform_version macos 13.0 13.0
-    METAL_FLAGS += -mmacosx-version-min=13.0
+	METAL_TT_FLAGS += -platform_version macos 13.0 13.0
+	METAL_FLAGS += -mmacosx-version-min=13.0
 endif
 
 # Recipes
@@ -33,14 +35,17 @@ all: $(METAL_BIN_LIB) $(METAL_LIB)
 
 $(METAL_BIN_LIB): $(MTLP_JSON) $(METAL_LIB)
 	metal-tt $(METAL_LIB) $(MTLP_JSON) -o $(METAL_BIN_LIB) $(METAL_TT_FLAGS)
-	
+
 $(MTLP_JSON): $(MTLP_JSON_GEN_SOURCE)
 	xcrun -sdk macosx swiftc $(SWIFT_FLAGS) -parse-as-library $(MTLP_JSON_GEN_SOURCE) -o $(MTLP_JSON_GEN) && ./$(MTLP_JSON_GEN)
 
-$(METAL_LIB): $(AIR_FILES)
-	metallib $^ -o $@
+$(METAL_LIB): $(AIR_PLACEHOLDER)
+	metallib *.air -o $@
 
-%.air: $(SRC_DIR)/%.metal
-	metal -c $< -o $@ $(METAL_FLAGS) -MMD
+%.placeholder: $(SRC_DIR)/%.metal
+	xcrun -sdk macosx swiftc $(SWIFT_FLAGS) -parse-as-library $(AIR_GEN_SOURCE) -o $(AIR_GEN) && ./$(AIR_GEN) $< $(METAL_FLAGS)
+
+%.d: $(SRC_DIR)/%.metal
+	metal -E $< -D"DUMMY" -MMD -MT $@
 
 -include $(DEP_FILES)

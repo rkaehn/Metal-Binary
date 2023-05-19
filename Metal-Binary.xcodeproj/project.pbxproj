@@ -7,11 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		07E529B02A1791C200D86EE0 /* main_vertex.metal in Sources */ = {isa = PBXBuildFile; fileRef = 07F620722A0F25A50062044D /* main_vertex.metal */; };
+		07E529B12A1791C200D86EE0 /* main_fragment.metal in Sources */ = {isa = PBXBuildFile; fileRef = 07E529AC2A1789B000D86EE0 /* main_fragment.metal */; };
+		07E529B32A17949C00D86EE0 /* air-gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E529B22A17949C00D86EE0 /* air-gen.swift */; };
 		07F620542A0F251A0062044D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F620532A0F251A0062044D /* main.swift */; };
 		07F620762A0F25C10062044D /* shaders.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07F6205D2A0F25530062044D /* shaders.framework */; };
 		07F620772A0F25C10062044D /* shaders.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07F6205D2A0F25530062044D /* shaders.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		07F6207B2A0F25E00062044D /* mtlp-json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F620702A0F25A50062044D /* mtlp-json.swift */; };
-		07F6207C2A0F25E50062044D /* main.metal in Sources */ = {isa = PBXBuildFile; fileRef = 07F620722A0F25A50062044D /* main.metal */; };
+		07F6207B2A0F25E00062044D /* mtlp-json-gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F620702A0F25A50062044D /* mtlp-json-gen.swift */; };
 		07F6207E2A0F25ED0062044D /* PipelineStateCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F620732A0F25A50062044D /* PipelineStateCache.swift */; };
 		07F6207F2A0F25EE0062044D /* PipelineStateCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F620732A0F25A50062044D /* PipelineStateCache.swift */; };
 		07F620922A0F26E80062044D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07F620912A0F26E80062044D /* Assets.xcassets */; };
@@ -76,13 +78,16 @@
 
 /* Begin PBXFileReference section */
 		07B0185F2A0F2ED400F9A2AD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.markdown; };
+		07E529AB2A17890800D86EE0 /* shader_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_types.h; sourceTree = "<group>"; };
+		07E529AC2A1789B000D86EE0 /* main_fragment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = main_fragment.metal; sourceTree = "<group>"; };
+		07E529B22A17949C00D86EE0 /* air-gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "air-gen.swift"; sourceTree = "<group>"; };
 		07F620502A0F251A0062044D /* shaders-test-macos */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "shaders-test-macos"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F620532A0F251A0062044D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		07F6205D2A0F25530062044D /* shaders.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = shaders.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F620692A0F257D0062044D /* shaders_dummy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = shaders_dummy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		07F620702A0F25A50062044D /* mtlp-json.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "mtlp-json.swift"; sourceTree = "<group>"; };
-		07F620712A0F25A50062044D /* make_shaders */ = {isa = PBXFileReference; lastKnownFileType = text; path = make_shaders; sourceTree = "<group>"; };
-		07F620722A0F25A50062044D /* main.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = main.metal; sourceTree = "<group>"; };
+		07F620702A0F25A50062044D /* mtlp-json-gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "mtlp-json-gen.swift"; sourceTree = "<group>"; };
+		07F620712A0F25A50062044D /* make_shaders */ = {isa = PBXFileReference; lastKnownFileType = text; path = make_shaders; sourceTree = "<group>"; usesTabs = 1; };
+		07F620722A0F25A50062044D /* main_vertex.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = main_vertex.metal; sourceTree = "<group>"; };
 		07F620732A0F25A50062044D /* PipelineStateCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PipelineStateCache.swift; sourceTree = "<group>"; };
 		07F620862A0F26E60062044D /* shaders-test-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "shaders-test-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F620912A0F26E80062044D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -155,9 +160,12 @@
 			children = (
 				07F620732A0F25A50062044D /* PipelineStateCache.swift */,
 				07F620A12A0F27E80062044D /* PipelineStateRecipe.swift */,
-				07F620722A0F25A50062044D /* main.metal */,
-				07F620702A0F25A50062044D /* mtlp-json.swift */,
+				07F620702A0F25A50062044D /* mtlp-json-gen.swift */,
+				07E529B22A17949C00D86EE0 /* air-gen.swift */,
 				07F620712A0F25A50062044D /* make_shaders */,
+				07E529AB2A17890800D86EE0 /* shader_types.h */,
+				07F620722A0F25A50062044D /* main_vertex.metal */,
+				07E529AC2A1789B000D86EE0 /* main_fragment.metal */,
 			);
 			path = shaders;
 			sourceTree = "<group>";
@@ -402,9 +410,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07E529B02A1791C200D86EE0 /* main_vertex.metal in Sources */,
+				07E529B12A1791C200D86EE0 /* main_fragment.metal in Sources */,
+				07E529B32A17949C00D86EE0 /* air-gen.swift in Sources */,
 				07F6207F2A0F25EE0062044D /* PipelineStateCache.swift in Sources */,
-				07F6207C2A0F25E50062044D /* main.metal in Sources */,
-				07F6207B2A0F25E00062044D /* mtlp-json.swift in Sources */,
+				07F6207B2A0F25E00062044D /* mtlp-json-gen.swift in Sources */,
 				07F620A32A0F28460062044D /* PipelineStateRecipe.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -830,6 +840,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				MTL_COMPILER_FLAGS = "-D\"DUMMY\"";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -916,6 +927,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
+				MTL_COMPILER_FLAGS = "-D\"DUMMY\"";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.raffaelkaehn.metal-binary.shaders-dummy";

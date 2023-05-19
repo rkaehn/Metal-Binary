@@ -24,20 +24,11 @@ public final class PipelineStateCache {
     private func makeFunctionWithDescriptor(_ functionDescriptor: FunctionDescriptor) -> MTLFunction {
         let descriptor = MTLFunctionDescriptor()
         descriptor.binaryArchives = [binaryArchive]
-        descriptor.name = functionDescriptor.name
         switch functionDescriptor.kind {
         case .basic:
-            break
-        case let .specialized(specializedName, functionConstants):
-            let constantValues = MTLFunctionConstantValues()
-            for functionConstant in functionConstants {
-                switch functionConstant.payload {
-                case var .uchar(value):
-                    constantValues.setConstantValue(&value, type: .uchar, index: functionConstant.index)
-                }
-            }
-            descriptor.constantValues = constantValues
-            descriptor.specializedName = specializedName
+            descriptor.name = functionDescriptor.name
+        case let .specialized(specializedName, _):
+            descriptor.name = specializedName
         }
         return try! library.makeFunction(descriptor: descriptor)
     }

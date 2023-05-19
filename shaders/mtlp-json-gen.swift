@@ -5,24 +5,8 @@ enum PipelineScript {
         let label: String
         let path: String
     }
-    struct Payload: Codable {
-        let data: Int
-    }
-    struct ConstantValue: Codable {
-        var idType: String = "FunctionConstantIndex"
-        let id: Payload
-        var valueType: String = "ConstantUChar"
-        let value: Payload
-    }
-    struct SpecializedFunction: Codable {
-        let label: String
-        let function: String
-        let specializedName: String
-        let constantValues: [ConstantValue]
-    }
     struct Libraries: Codable {
         let paths: [Path]
-        let specializedFunctions: [SpecializedFunction]
     }
     struct RenderPipeline: Codable {
         let vertexFunction: String
@@ -38,11 +22,10 @@ enum PipelineScript {
 }
 
 @main
-struct Main {
+struct mtlp_json_gen {
     static func main() {
         let envDerivedFileDir = ProcessInfo.processInfo.environment["DERIVED_FILE_DIR"]!
         
-        var specializedFunctions: [PipelineScript.SpecializedFunction] = []
         var renderPipelines: [PipelineScript.RenderPipeline] = []
         
         let handleFunction: ((FunctionDescriptor) -> String) = { function in
@@ -50,26 +33,8 @@ struct Main {
             switch function.kind {
             case .basic:
                 functionName = function.name
-            case let .specialized(specializedName, functionConstants):
-                let libName = "lib_\(specializedFunctions.count)"
-                functionName = "alias:\(libName)#\(specializedName)"
-                
-                var constantValues: [PipelineScript.ConstantValue] = []
-                for functionConstant in functionConstants {
-                    let idPayload = PipelineScript.Payload(data: functionConstant.index)
-                    let valuePayload: PipelineScript.Payload
-                    switch functionConstant.payload {
-                    case let .uchar(value):
-                        valuePayload = .init(data: Int(value))
-                    }
-                    constantValues.append(.init(id: idPayload, value: valuePayload))
-                }
-                let specializedFunction = PipelineScript.SpecializedFunction(
-                    label: libName,
-                    function: function.name,
-                    specializedName: specializedName,
-                    constantValues: constantValues)
-                specializedFunctions.append(specializedFunction)
+            case let .specialized(specializedName, _):
+                functionName = specializedName
             }
             return functionName
         }
@@ -87,8 +52,7 @@ struct Main {
             libraries: PipelineScript.Libraries(
                 paths: [
                     PipelineScript.Path(label: "main", path: envDerivedFileDir + "/main.metallib")
-                ],
-                specializedFunctions: specializedFunctions),
+                ]),
             pipelines: PipelineScript.Pipelines(renderPipelines: renderPipelines))
         
         let encoder = JSONEncoder()

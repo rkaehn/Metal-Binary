@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "07F6204F2A0F251A0062044D"
-               BuildableName = "shaders-test-macos"
-               BlueprintName = "shaders-test-macos"
+               BlueprintIdentifier = "07F6205C2A0F25530062044D"
+               BuildableName = "shaders.framework"
+               BlueprintName = "shaders"
                ReferencedContainer = "container:Metal-Binary.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -38,18 +38,7 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES"
-      viewDebuggingEnabled = "No">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "07F6204F2A0F251A0062044D"
-            BuildableName = "shaders-test-macos"
-            BlueprintName = "shaders-test-macos"
-            ReferencedContainer = "container:Metal-Binary.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
+      allowLocationSimulation = "YES">
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -57,16 +46,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "07F6204F2A0F251A0062044D"
-            BuildableName = "shaders-test-macos"
-            BlueprintName = "shaders-test-macos"
+            BlueprintIdentifier = "07F6205C2A0F25530062044D"
+            BuildableName = "shaders.framework"
+            BlueprintName = "shaders"
             ReferencedContainer = "container:Metal-Binary.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
