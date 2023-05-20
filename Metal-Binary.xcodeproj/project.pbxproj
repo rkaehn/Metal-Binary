@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		07E529B02A1791C200D86EE0 /* main_vertex.metal in Sources */ = {isa = PBXBuildFile; fileRef = 07F620722A0F25A50062044D /* main_vertex.metal */; };
 		07E529B12A1791C200D86EE0 /* main_fragment.metal in Sources */ = {isa = PBXBuildFile; fileRef = 07E529AC2A1789B000D86EE0 /* main_fragment.metal */; };
-		07E529B32A17949C00D86EE0 /* air-gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E529B22A17949C00D86EE0 /* air-gen.swift */; };
+		07E529B32A17949C00D86EE0 /* metal-gen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E529B22A17949C00D86EE0 /* metal-gen.swift */; };
 		07F620542A0F251A0062044D /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F620532A0F251A0062044D /* main.swift */; };
 		07F620762A0F25C10062044D /* shaders.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07F6205D2A0F25530062044D /* shaders.framework */; };
 		07F620772A0F25C10062044D /* shaders.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 07F6205D2A0F25530062044D /* shaders.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -80,7 +80,7 @@
 		07B0185F2A0F2ED400F9A2AD /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.markdown; };
 		07E529AB2A17890800D86EE0 /* shader_types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader_types.h; sourceTree = "<group>"; };
 		07E529AC2A1789B000D86EE0 /* main_fragment.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = main_fragment.metal; sourceTree = "<group>"; };
-		07E529B22A17949C00D86EE0 /* air-gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "air-gen.swift"; sourceTree = "<group>"; };
+		07E529B22A17949C00D86EE0 /* metal-gen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "metal-gen.swift"; sourceTree = "<group>"; };
 		07F620502A0F251A0062044D /* shaders-test-macos */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "shaders-test-macos"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07F620532A0F251A0062044D /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		07F6205D2A0F25530062044D /* shaders.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = shaders.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -161,7 +161,7 @@
 				07F620732A0F25A50062044D /* PipelineStateCache.swift */,
 				07F620A12A0F27E80062044D /* PipelineStateRecipe.swift */,
 				07F620702A0F25A50062044D /* mtlp-json-gen.swift */,
-				07E529B22A17949C00D86EE0 /* air-gen.swift */,
+				07E529B22A17949C00D86EE0 /* metal-gen.swift */,
 				07F620712A0F25A50062044D /* make_shaders */,
 				07E529AB2A17890800D86EE0 /* shader_types.h */,
 				07F620722A0F25A50062044D /* main_vertex.metal */,
@@ -412,7 +412,7 @@
 			files = (
 				07E529B02A1791C200D86EE0 /* main_vertex.metal in Sources */,
 				07E529B12A1791C200D86EE0 /* main_fragment.metal in Sources */,
-				07E529B32A17949C00D86EE0 /* air-gen.swift in Sources */,
+				07E529B32A17949C00D86EE0 /* metal-gen.swift in Sources */,
 				07F6207F2A0F25EE0062044D /* PipelineStateCache.swift in Sources */,
 				07F6207B2A0F25E00062044D /* mtlp-json-gen.swift in Sources */,
 				07F620A32A0F28460062044D /* PipelineStateRecipe.swift in Sources */,

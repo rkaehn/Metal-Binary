@@ -1,12 +1,15 @@
+#if CODE_GEN_HEADER || DUMMY
 #include <metal_stdlib>
 using namespace metal;
 
 #include "shader_types.h"
 
 #if DUMMY
-constant uchar testConstant [[function_constant(0)]];
+#define testConstant 32
+#endif
 #endif
 
+#if CODE_GEN_BODY || DUMMY
 fragment void main_fragment(MainVertexOut in [[stage_in]],
                             device uint& mainBuffer [[buffer(0)]]) {
 #if DEBUG
@@ -15,3 +18,4 @@ fragment void main_fragment(MainVertexOut in [[stage_in]],
     mainBuffer = test_var + testConstant;
 #endif
 }
+#endif

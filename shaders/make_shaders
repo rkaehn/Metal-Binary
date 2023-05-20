@@ -9,7 +9,7 @@ METAL_BIN_LIB = mainbin.metallib
 METAL_LIB = main.metallib
 MTLP_JSON = main.mtlp-json
 MTLP_JSON_GEN = mtlp-json-gen
-AIR_PLACEHOLDER_FILES = $(patsubst $(SRC_DIR)/%.metal, %.air-placeholder, $(METAL_SOURCE))
+AIR_FILES = $(patsubst $(SRC_DIR)/%.metal, %.air, $(METAL_SOURCE))
 AIR_GEN = air-gen
 DEP_FILES = $(patsubst $(SRC_DIR)/%.metal, %.d, $(METAL_SOURCE))
 
@@ -39,10 +39,10 @@ $(METAL_BIN_LIB): $(MTLP_JSON) $(METAL_LIB)
 $(MTLP_JSON): $(MTLP_JSON_GEN_SOURCE)
 	xcrun -sdk macosx swiftc $(SWIFT_FLAGS) -parse-as-library $(MTLP_JSON_GEN_SOURCE) -o $(MTLP_JSON_GEN) && ./$(MTLP_JSON_GEN)
 
-$(METAL_LIB): $(AIR_PLACEHOLDER_FILES)
-	metallib *.air -o $@
+$(METAL_LIB): $(AIR_FILES)
+	metallib $^ -o $@
 
-%.air-placeholder: $(SRC_DIR)/%.metal %.d $(AIR_GEN_SOURCE)
+%.air: $(SRC_DIR)/%.metal %.d $(AIR_GEN_SOURCE)
 	xcrun -sdk macosx swiftc $(SWIFT_FLAGS) -parse-as-library $(AIR_GEN_SOURCE) -o $(AIR_GEN) && ./$(AIR_GEN) $< $(METAL_FLAGS)
 
 %.d: $(SRC_DIR)/%.metal

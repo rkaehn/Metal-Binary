@@ -21,7 +21,7 @@ func shell(_ command: String) throws {
 }
 
 @main
-struct air_gen {
+struct metal_gen {
     static func main() {
         let inputPath = CommandLine.arguments[1]
         let inputBaseName = ((inputPath as NSString).lastPathComponent as NSString).deletingPathExtension
