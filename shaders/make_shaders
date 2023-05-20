@@ -46,6 +46,6 @@ $(METAL_LIB): $(AIR_FILES)
 	xcrun -sdk macosx swiftc $(SWIFT_FLAGS) -parse-as-library $(AIR_GEN_SOURCE) -o $(AIR_GEN) && ./$(AIR_GEN) $< $(METAL_FLAGS)
 
 %.d: $(SRC_DIR)/%.metal
-	metal $< -D"DUMMY" -MMD -MT $@
+	metal $< -D"DUMMY" -MM -MQ $@ -MF $@
 
 -include $(DEP_FILES)
