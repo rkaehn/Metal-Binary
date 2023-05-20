@@ -1,4 +1,4 @@
-#if CODE_GEN_HEADER || DUMMY
+// CODE_GEN_HEADER_BEGIN
 #include <metal_stdlib>
 using namespace metal;
 
@@ -7,9 +7,9 @@ using namespace metal;
 #if DUMMY
 #define testConstant 32
 #endif
-#endif
+// CODE_GEN_HEADER_END
 
-#if CODE_GEN_BODY || DUMMY
+// CODE_GEN_BODY_BEGIN
 fragment void main_fragment(MainVertexOut in [[stage_in]],
                             device uint& mainBuffer [[buffer(0)]]) {
 #if DEBUG
@@ -18,4 +18,4 @@ fragment void main_fragment(MainVertexOut in [[stage_in]],
     mainBuffer = test_var + testConstant;
 #endif
 }
-#endif
+// CODE_GEN_BODY_END

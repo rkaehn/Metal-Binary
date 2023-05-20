@@ -3,7 +3,7 @@
 #include <metal_stdlib>
 using namespace metal;
 
-#define test_var 1
+#define test_var 2
 
 constant float2 quad_pos[] = {
     float2(-1, -1),
