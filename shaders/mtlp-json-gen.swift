@@ -24,8 +24,6 @@ enum PipelineScript {
 @main
 struct mtlp_json_gen {
     static func main() {
-        let envDerivedFileDir = ProcessInfo.processInfo.environment["DERIVED_FILE_DIR"]!
-        
         var renderPipelines: [PipelineScript.RenderPipeline] = []
         
         let handleFunction: ((FunctionDescriptor) -> String) = { function in
@@ -51,7 +49,7 @@ struct mtlp_json_gen {
         let script = PipelineScript.Script(
             libraries: PipelineScript.Libraries(
                 paths: [
-                    PipelineScript.Path(label: "main", path: envDerivedFileDir + "/main.metallib")
+                    PipelineScript.Path(label: "main", path: "main.metallib")
                 ]),
             pipelines: PipelineScript.Pipelines(renderPipelines: renderPipelines))
         
@@ -61,7 +59,7 @@ struct mtlp_json_gen {
         
         let outputData = try! encoder.encode(script)
         
-        let outputURL = URL(fileURLWithPath: envDerivedFileDir + "/main.mtlp-json")
+        let outputURL = URL(fileURLWithPath: "main.mtlp-json")
         try! outputData.write(to: outputURL)
         
         let output = String(data: outputData, encoding: .utf8)!
